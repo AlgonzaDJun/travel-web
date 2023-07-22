@@ -72,6 +72,7 @@
     </div>
 
     @include('includes.admin.script')
+    @include('sweetalert::alert')
 
 </body>
 
