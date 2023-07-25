@@ -20,7 +20,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
                                 Paket Travel</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">10</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $travel_package }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-hotel fa-2x text-gray-300"></i>
@@ -38,7 +38,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
                                 Transaksi</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">14</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $transaction }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-dollar-sign fa-2x text-gray-300"></i>
@@ -58,7 +58,7 @@
                             </div>
                             <div class="row no-gutters align-items-center">
                                 <div class="col-auto">
-                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">8</div>
+                                    <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ $transaction_pending }}</div>
                                 </div>
                                 
                             </div>
@@ -79,7 +79,7 @@
                         <div class="col mr-2">
                             <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
                                 Sukses</div>
-                            <div class="h5 mb-0 font-weight-bold text-gray-800">5</div>
+                            <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $transaction_sukses }}</div>
                         </div>
                         <div class="col-auto">
                             <i class="fas fa-check fa-2x text-gray-300"></i>
