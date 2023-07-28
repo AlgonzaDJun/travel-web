@@ -117,7 +117,7 @@
                             <div class="testimonial-content">
                                 <img src="frontend/images/testimonial-1.png" alt="User" class="mb-4 rounded-circle"
                                     width="120px" height="120px" />
-                                <h3 class="mb-4">Algonza Dewangga</h3>
+                                <h3 class="mb-4">Arjun</h3>
                                 <p class="testimonial">
                                     “ It was glorious and I could not stop to say wohooo for
                                     every single moment Dankeeeeee “
@@ -147,7 +147,7 @@
                             <div class="testimonial-content">
                                 <img src="frontend/images/testimonial-3.png" alt="User" class="mb-4 rounded-circle"
                                     width="120px" height="120px" />
-                                <h3 class="mb-4">Sabri</h3>
+                                <h3 class="mb-4">Nyu</h3>
                                 <p class="testimonial">
                                     “ I loved it when the waves was shaking harder — I was
                                     scared too “
@@ -162,7 +162,7 @@
                 <div class="row">
                     <div class="col-12 text-center">
                         <a href="#" class="btn btn-need-help px-4 mt-4 mx-1">I Need Help</a>
-                        <a href="{{ route('register' ) }}" class="btn btn-get-started px-4 mt-4 mx-1">Get Started</a>
+                        <a href="{{ route('register') }}" class="btn btn-get-started px-4 mt-4 mx-1">Get Started</a>
                     </div>
                 </div>
             </div>

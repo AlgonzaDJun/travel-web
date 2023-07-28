@@ -33,8 +33,8 @@
             <ul class="list-unstyled">
             <li><a href="#">Surabaya</a></li>
             <li><a href="#">Indonesia</a></li>
-            <li><a href="#">0812-4336-7761</a></li>
-            <li><a href="#">support@nomads.id</a></li>
+            <li><a href="https://wa.me/6281243367761">0812-4336-7761</a></li>
+            <li><a href="#">algonsadewangga@gmail.com</a></li>
             </ul>
         </div>
         </div>

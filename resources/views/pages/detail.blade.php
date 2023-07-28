@@ -44,11 +44,6 @@
                             <p>
                                 {!! $item->about !!}
                             </p>
-                            <p>
-                                Bali and a district of Klungkung Regency that includes the
-                                neighbouring small island of Nusa Lembongan. The Badung Strait
-                                separates the island and Bali.
-                            </p>
                             <div class="features row">
                                 <div class="col-md-4 border-right">
                                     <img src="{{ url('frontend/images/ic_event.png') }}" alt=""
@@ -67,7 +62,8 @@
                                     </div>
                                 </div>
                                 <div class="col-md-4">
-                                    <img src="frontend/images/ic_foods.png" alt="" class="features-image" />
+                                    <img src="{{ url('frontend/images/ic_foods.png') }}" alt=""
+                                        class="features-image" />
                                     <div class="description">
                                         <h3>Foods</h3>
                                         <p>{{ $item->foods }}</p>
@@ -79,17 +75,28 @@
                     <div class="col-lg-4">
                         <div class="card card-details card-right">
                             <h2>Members Are Going</h2>
+                            {{-- <p>
+                                {{ Auth::user()->id }}
+                            </p> --}}
                             <div class="members my-2">
-                                <img src="frontend/images/member-1.png" alt="Member-image" class="member-image mr-1"
-                                    style="border-radius: 50%; object-fit: cover;">
-                                <img src="frontend/images/member-2.png" alt="Member-image" class="member-image mr-1"
-                                    style="border-radius: 50%; object-fit: cover;">
-                                <img src="frontend/images/member-3.png" alt="Member-image" class="member-image mr-1"
-                                    style="border-radius: 50%; object-fit: cover;">
-                                <img src="frontend/images/member-4.png" alt="Member-image" class="member-image mr-1"
-                                    style="border-radius: 50%; object-fit: cover;">
-                                <img src="frontend/images/member-5.png" alt="Member-image" class="member-image mr-1"
-                                    style="border-radius: 50%; object-fit: cover;">
+
+                                @forelse ($members_going as $member_going)
+                                    <img src="{{ $member_going->image ? Storage::url($member_going->image) : 'https://ui-avatars.com/api/?name=' . $member_going->username }}"
+                                        alt="Member-image" class="member-image mr-1"
+                                        style="border-radius: 50%; object-fit: cover;">
+                                @empty
+                                    <p>No one is going yet</p>
+                                @endforelse
+                                {{-- <img src="{{ url('frontend/images/member-1.png') }}" alt="Member-image"
+                                    class="member-image mr-1" style="border-radius: 50%; object-fit: cover;">
+                                <img src="{{ url('frontend/images/member-2.png') }}" alt="Member-image"
+                                    class="member-image mr-1" style="border-radius: 50%; object-fit: cover;">
+                                <img src="{{ url('frontend/images/member-3.png') }}" alt="Member-image"
+                                    class="member-image mr-1" style="border-radius: 50%; object-fit: cover;">
+                                <img src="{{ url('frontend/images/member-4.png') }}" alt="Member-image"
+                                    class="member-image mr-1" style="border-radius: 50%; object-fit: cover;">
+                                <img src="{{ url('frontend/images/member-5.png') }}" alt="Member-image"
+                                    class="member-image mr-1" style="border-radius: 50%; object-fit: cover;"> --}}
                             </div>
                             <hr />
                             <h2>Trip Information</h2>
@@ -116,14 +123,25 @@
                         </div>
                         <div class="join-container">
                             @auth
-                                <form action="" method="POST">
-                                  <button class="btn btn-block btn-join-now mt-3 py-2" type="submit">
-                                      Join Now
-                                  </button>
-                                </form>
+                                @if (isset($status) && $detail > 0)
+                                    <form action="{{ route('checkout', $status->id) }}" method="GET">
+                                        @csrf
+                                        <button class="btn btn-block btn-join-now mt-3 py-2" type="submit">
+                                            Go To Cart
+                                        </button>
+                                    </form>
+                                @else
+                                    <form action="{{ route('checkout-process', $item->id) }}" method="POST">
+                                        @csrf
+                                        <button class="btn btn-block btn-join-now mt-3 py-2" type="submit">
+                                            Join Now
+                                        </button>
+                                    </form>
+                                @endif
                             @endauth
                             @guest
-                                <a href="{{ route('login') }}" class="btn btn-block btn-join-now mt-3 py-2">Login or Register To Join Trip</a>
+                                <a href="{{ route('login') }}" class="btn btn-block btn-join-now mt-3 py-2">Login or Register
+                                    To Join Trip</a>
                             @endguest
                         </div>
                     </div>

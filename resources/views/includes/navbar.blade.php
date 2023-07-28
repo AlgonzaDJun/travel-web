@@ -46,18 +46,42 @@
 
             @auth
                 <!-- mobile button -->
-                <form action="{{ url('logout', []) }}" class="form-inline d-sm-block d-md-none" method="POST">
+                {{-- <form action="{{ url('logout', []) }}" class="form-inline d-sm-block d-md-none" method="POST">
                     @csrf
                     <button class="btn btn-login px-4" type="submit">keluar</button>
-                </form>
+                </form> --}}
+
+                <div class="d-block d-md-flex justify-content-lg-end align-items-center collapse navbar-collapse d-flex"
+                    id="navbar-list-4">
+                    <ul class="navbar-nav my-0">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <img src="{{ Auth::user()->image ? Storage::url(Auth::user()->image) : 'https://ui-avatars.com/api/?name=' . Auth::user()->username }}"
+                                    width="40" height="40" class="rounded-circle object-contain">
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                                <a class="dropdown-item" href="/profile">Edit Profile</a>
+                                <form action="{{ url('logout') }}" method="POST">
+                                    @csrf
+                                    <button class="dropdown-item" type="submit">
+                                        keluar
+                                    </button>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+
 
                 <!-- desktop button -->
-                <form action="{{ url('logout', []) }}" class="form-inline my-2 my-lg-0 d-none d-md-block" method="POST">
+                {{-- <form action="{{ url('logout', []) }}" class="form-inline my-2 my-lg-0 d-none d-md-block" method="POST">
                     @csrf
                     <button class="btn btn-login btn-navbar-right my-2 my-sm-0 px-4" type="submit">
                         keluar
                     </button>
-                </form>
+                </form> --}}
             @endauth
         </div>
     </nav>

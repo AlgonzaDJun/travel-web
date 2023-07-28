@@ -41,6 +41,13 @@ Route::post('/checkout/confirm/{id}', 'CheckoutController@success')
     ->name('checkout-success')
     ->middleware(['auth', 'verified']);
 
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::get('/profile', 'ProfileController@index')
+        ->name('profile');
+    Route::post('/profile', 'ProfileController@update')
+        ->name('profile-update');
+});
+
 Route::prefix('admin')
     ->namespace('Admin')
     ->middleware(['auth', 'admin'])
