@@ -5,6 +5,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@yield('title')</title>
+    {{-- description --}}
+    <meta name="description" content="Explore The Beautiful World
+    As Easy One Click" />
+    <meta name="keywords" content="travel web, yuk travel, paket travel">
+    <meta name="author" content="Algonza Arjunantyo">
+    <link rel="shortcut icon" href="{{ url('frontend/images/worldwide.png') }}" type="image/x-icon">
 
     @stack('prepend-style')
     @include('includes.style')
