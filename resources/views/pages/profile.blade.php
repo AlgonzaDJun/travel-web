@@ -64,10 +64,10 @@
                                 </div>
 
                                 <div class="mb-3 row">
-                                    <label for="username" class="col-sm-2 col-form-label">New Username</label>
+                                    <label for="name" class="col-sm-2 col-form-label">New Name</label>
                                     <div class="col-sm-10">
-                                        <input type="text" name="username" class="form-control"
-                                            value="{{ old('username', $user->username) }}" id="username">
+                                        <input type="text" name="name" class="form-control"
+                                            value="{{ old('name', $user->name) }}" id="name">
                                     </div>
                                 </div>
 

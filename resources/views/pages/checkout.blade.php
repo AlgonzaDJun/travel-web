@@ -153,30 +153,30 @@
                             <hr />
                             <h2>Payment Instruction</h2>
                             <p class="payment-instruction">
-                                Please complete your payment before to continue the wonderful
-                                trip
+                                You will redirected to another page to pay using GOPAY or BCA KLIK or BRIMO
                             </p>
+
+                            <img src="{{ url('frontend/images/logo-gopay-vector.png', []) }}" class="w-50 mb-3" alt="">
                             <div class="bank">
-                                <div class="bank-item pb-5 mb-5">
-                                    <img src="{{ url('frontend/images/ic_bank.png') }}" alt=""
+                                <div class="bank-item pb-5 mb-3">
+                                    <img src="{{ url('frontend/images/Bank_Central_Asia.svg') }}" alt=""
                                         class="bank-image" />
                                     <div class="description">
-                                        <h3>PT Algonza ID</h3>
+                                        <h3>Algonza Arjunantyo</h3>
                                         <p>
-                                            0881 8829 8800 <br />
+                                            1234 567 890 <br />
                                             Bank Central Asia
                                         </p>
                                     </div>
                                     <div class="clear-fix"></div>
                                 </div>
-                                <div class="bank-item pb-5 mb-5">
-                                    <img src="{{ url('frontend/images/ic_bank.png') }}" alt=""
+                                <div class="bank-item pb-5 mb-3">
+                                    <img src="{{ url('frontend/images/Logo_baru_BRImo.svg') }}" alt=""
                                         class="bank-image" />
                                     <div class="description">
-                                        <h3>PT Algonza ID</h3>
+                                        <h3>Algonza Arjunantyo</h3>
                                         <p>
-                                            0899 8501 7888 <br />
-                                            Bank HSBC
+                                            BRIMO
                                         </p>
                                     </div>
                                     <div class="clear-fix"></div>

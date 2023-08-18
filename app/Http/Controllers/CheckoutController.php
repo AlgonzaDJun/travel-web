@@ -2,12 +2,19 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TransactionSuccess;
 use App\Transaction;
 use App\TransactionDetail;
 use App\TravelPackage;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Mail;
+use \Midtrans\Config;
+use \Midtrans\Snap;
+
+
 use RealRashid\SweetAlert\Facades\Alert;
 
 class CheckoutController extends Controller
@@ -97,13 +104,57 @@ class CheckoutController extends Controller
     // success
     public function success(Request $request, $id)
     {
-        $transaction = Transaction::findOrFail($id);
+        $transaction = Transaction::with(['details', 'travel_package.galleries', 'user'])->findOrFail($id);
         $detail = $transaction->details->count();
         if ($detail == 0) {
             return back()->withError('Data tidak boleh kosong');
         }
         $transaction->transaction_status = 'PENDING';
         $transaction->save();
-        return view('pages.success');
+
+
+        // set konfig midtrans
+        Config::$serverKey = config('midtrans.serverKey');
+        Config::$isProduction = config('midtrans.isProduction');
+        Config::$isSanitized = config('midtrans.isSanitized');
+        Config::$is3ds = config('midtrans.is3ds');
+        Config::$clientKey = config('midtrans.clientKey');
+
+        // buat array untuk dikirim ke midtrans
+        $midtrans_params = [
+            'transaction_details' => [
+                'order_id' => 'Midtrans-' . $transaction->id,
+                'gross_amount' => (int) $transaction->transaction_total,
+            ],
+            'customer_details' => [
+                'first_name' => 'cutomer',
+                'last_name' => $transaction->user->name,
+                'email' => $transaction->user->email,
+                'phone' => '08123456789'
+            ],
+            'enabled_payments' => ['gopay', 'bca_klikpay', 'bri_epay', 'bca_klikbca'],
+            'vtweb' => []
+        ];
+
+        // ambil halaman payment midtrans
+        try {
+            $paymentUrl = Snap::createTransaction($midtrans_params)->redirect_url;
+            // $snapToken = Snap::getSnapToken($midtrans_params);
+            // redirect ke halaman midtrans
+            return redirect($paymentUrl);
+            // echo "<script>window.location.href='" . $paymentUrl . "'</script>";
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+
+        // kirim email ke user ke tiketnya 
+        // Mail::to($transaction->user)->send(
+        //     new TransactionSuccess($transaction)
+        // );
+
+        // return view('pages.success', [
+        //     'client_key' => Config::$clientKey,
+        //     'snap_token' => $snapToken
+        // ]);
     }
 }

@@ -62,6 +62,7 @@
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                                 <a class="dropdown-item" href="/profile">Edit Profile</a>
+                                <a class="dropdown-item" href="/orders">My Order</a>
                                 <form action="{{ url('logout') }}" method="POST">
                                     @csrf
                                     <button class="dropdown-item" type="submit">

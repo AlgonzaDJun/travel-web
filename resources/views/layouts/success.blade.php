@@ -10,6 +10,7 @@
     @stack('prepend-style')
     @include('includes.style')
     @stack('addon-style')
+    @stack('script-head')
 
 </head>
 

@@ -48,6 +48,8 @@ Route::group(['middleware' => ['auth', 'verified']], function () {
         ->name('profile-update');
 });
 
+Route::get('/orders', 'OrdersController@index');
+
 Route::prefix('admin')
     ->namespace('Admin')
     ->middleware(['auth', 'admin'])
@@ -60,3 +62,9 @@ Route::prefix('admin')
     });
 
 Auth::routes(['verify' => true]);
+
+// midtrans
+Route::post('/midtrans/callback', 'MidtransController@notificationHandler');
+Route::get('/midtrans/finish', 'MidtransController@finishRedirect');
+Route::get('/midtrans/unfinished', 'MidtransController@unfinishedRedirect');
+Route::get('/midtrans/error', 'MidtransController@errorRedirect');

@@ -2,13 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UpdateProfileRequest;
-use App\User;
+use App\Transaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
-class ProfileController extends Controller
+class OrdersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +15,13 @@ class ProfileController extends Controller
      */
     public function index()
     {
-        return view('pages.profile', [
-            'user' => auth()->user(),
+        $order_history = Transaction::with(['details', 'travel_package', 'user'])
+            ->where('user_id', Auth::user()->id)->orderBy('id', 'DESC')
+            ->paginate(5);
+
+        // dd($order_history->first()->details);
+        return view('pages.orders', [
+            'order_history' => $order_history
         ]);
     }
 
@@ -72,31 +75,9 @@ class ProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProfileRequest $request)
+    public function update(Request $request, $id)
     {
-        // dd($request->all());
-        $data = [
-            'name' => $request->name,
-            'email' => $request->email,
-        ];
-
-        if ($request->file('image')) {
-            $data['image'] = $request->file('image')->store(
-                'assets/users',
-                'public'
-            );
-        }
-
-        if ($request->current_password && $request->new_password) {
-            if (!Hash::check($request->current_password, Auth::user()->password)) {
-                return back()->with("error", "Old Password Doesn't match!");
-            };
-            $data['password'] = Hash::make($request->new_password);
-        }
-
-        #Update the new Password
-        User::find(Auth::user()->id)->update($data);
-        return back()->with("success", "Profile Updated Successfully!");
+        //
     }
 
     /**
